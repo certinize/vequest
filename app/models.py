@@ -5,12 +5,12 @@ from sqlalchemy import orm
 pydantic.BaseConfig.arbitrary_types_allowed = True
 
 
-class VerificationRequest(sqlmodel.SQLModel, table=True):
+class VerificationRequests(sqlmodel.SQLModel, table=True):
     pubkey: str | None = sqlmodel.Field(default=None, primary_key=True)  # type: ignore
-    info_link: pydantic.HttpUrl | None = sqlmodel.Field(default=None)  # type: ignore
-    official_website: pydantic.HttpUrl | None = sqlmodel.Field(default=None)  # type: ignore
-    official_email: pydantic.EmailStr = sqlmodel.Field(default_factory=None)  # type: ignore
-    organization_id: str | None = sqlmodel.Field(default=None)  # type: ignore
+    info_link: pydantic.HttpUrl
+    official_website: pydantic.HttpUrl
+    official_email: pydantic.EmailStr
+    organization_id: str
     approved: bool = sqlmodel.Field(default=False)  # type: ignore
 
     @classmethod
