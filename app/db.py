@@ -33,7 +33,6 @@ class Database:
         Returns:
             models.VerificationRequests: the updated verification request
         """
-        print(pubkey, type(pubkey))
         with sqlmodel.Session(self.db_engine) as session:
             statement = sqlmodel.select(  # type: ignore
                 models.VerificationRequests
@@ -49,6 +48,7 @@ class Database:
             result.official_email = verification_request.official_email
             result.organization_id = verification_request.organization_id
             result.approved = verification_request.approved
+            result.verified_on = verification_request.verified_on
 
             session.add(result)
             session.commit()

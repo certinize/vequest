@@ -2,6 +2,7 @@ import typing
 
 import fastapi
 from fastapi.middleware import cors
+from sqlalchemy import exc
 
 from app import db, deps, events, models
 
@@ -31,4 +32,7 @@ def update_vequest(
     verification_request: models.VerificationRequests,
     db: db.Database = fastapi.Depends(deps.get_db_client),
 ) -> typing.Any:
-    return db.update(pubkey, verification_request)
+    try:
+        return db.update(pubkey, verification_request)
+    except exc.NoResultFound:
+        return fastapi.Response(status_code=404)
