@@ -7,7 +7,6 @@ pydantic.BaseConfig.arbitrary_types_allowed = True
 
 class VerificationRequests(sqlmodel.SQLModel, table=True):
     pubkey: str | None = sqlmodel.Field(default=None, primary_key=True)  # type: ignore
-    organization_name: str | None = sqlmodel.Field(default=None)  # type: ignore
     info_link: pydantic.HttpUrl
     official_website: pydantic.HttpUrl
     official_email: pydantic.EmailStr
